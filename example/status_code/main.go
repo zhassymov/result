@@ -50,7 +50,7 @@ func HandleStatus(handle func(w http.ResponseWriter, r *http.Request) error) htt
 		}
 
 		// get status code from error
-		status := result.StatusCode(err)
+		status := result.StatusCode(err, http.StatusInternalServerError)
 
 		// write error status code
 		w.WriteHeader(status)

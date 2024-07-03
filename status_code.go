@@ -10,7 +10,7 @@ const (
 	StatusUnknown  = 520 // Web Server Returned an Unknown Error
 )
 
-func StatusCode(err error) int {
+func StatusCode(err error, fallback int) int {
 	if err == nil {
 		return http.StatusOK
 	}
@@ -18,7 +18,7 @@ func StatusCode(err error) int {
 	if errors.As(err, &cause) {
 		return cause.StatusCode()
 	}
-	return http.StatusInternalServerError
+	return fallback
 }
 
 type withStatus struct {
